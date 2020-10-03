@@ -1,16 +1,4 @@
-<?php
- include('login_valid.php'); // Includes Login Script
-if(isset($_SESSION['login_user']))
-{
-	$i=1;
-	if($_SESSION['userlevel']!=$i)
-	header("location: newmain2.php");
-	else
-	{
-		header("location: newmain.php");
-	}
-}
-  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
