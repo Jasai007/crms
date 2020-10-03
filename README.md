@@ -1,7 +1,11 @@
-<!DOCTYPE html>
+
+
+
+
+
 <html>
 <head>
-	<title>MY PROJECT</title>
+	
 <style>
 body {
   background-color: lightgrey;
