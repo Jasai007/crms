@@ -8,7 +8,7 @@
 <a href="https://github.com/Jasai007/crms.github.io.git" ><i>Click here</i></a><br>
 To see this Dynamic website--<a href="http://crms.epizy.com/" ><i>Click here</i></a></p>
 
-<p style="font-size: 20px;text-align: center;">Some functions in the website may not work properly as it is not hosted from a proper server<br> so it is suggested to logout once and then again login for further processsing of the tasks otherwise it works good just for viewing purpose.</p>
+<p style="font-size: 20px;text-align: center;">Some functions in the website may not work properly as it is not hosted from a proper server<br> so it is suggested to logout once and then again login for further processsing of the tasks otherwise it works good just for viewing purpose.(Only for Desktop view)</p>
 
 <p style="font-size: 20px;text-align: center;"><strong>LOGIN DETAILS</strong></p>
 <p style="font-size: 20px;text-align: center;"><u>ADMIN USER</u><br> username-- jasai007<br>password-- jasai</p>
