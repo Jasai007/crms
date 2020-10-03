@@ -10,6 +10,7 @@ To see this Dynamic website--<a href="http://crms.epizy.com/" ><i>Click here</i>
 <p style="font-size: 20px;text-align: center;"><strong>LOGIN DETAILS</strong></p>
 <p style="font-size: 20px;text-align: center;"><u>ADMIN USER</u><br> username-- jasai007<br>password-- jasai</p>
 <p style="font-size: 20px;text-align: center;"><u>GENERAL USER</u><br> username-- monty99<br>password-- monty</p>
-<style>body{<background-color: lightgrey;}</style>
+<style>
+ body{background-color: lightgrey;}</style>
  
 
