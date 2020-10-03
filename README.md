@@ -10,7 +10,8 @@
 body {
   background-color: lightgrey;
 }
-
+p1{ align="center"style="font-size: 30px;"
+		}
 
 
 
@@ -21,7 +22,7 @@ body {
 
 <h1  style="color: white;text-align: center;">My Project on</h1>
 
-<p align="center"style="font-size: 30px;"><strong>Railway Coach Repair and Management System</strong></p>
+<p1><strong>Railway Coach Repair and Management System</strong></p1>
 
 <p align="center"style="font-size: 20px; "> The <strong>COACH REPAIR AND MANAGEMENT SYSTEM </strong>is web based application developed to track the coach position in carriage shops of South Eastern Railways, Kharagpur.</p>
 
