@@ -1,21 +1,12 @@
-
-<!DOCTYPE html>
 <html>
-<head>
-
+<head> ##heading
 <style>
 body {
   background-color: lightgrey;
 }
-
-
-
-
-
 </style>
 </head>
 <body>
-
 <h1  style="color: white;text-align: center;">My Project on</h1>
 
 ##**Railway Coach Repair and Management System**
