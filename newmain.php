@@ -18,8 +18,7 @@ require_once "session.php";
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/site.css">
 
-  <script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-<link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+ 
   
 
 
@@ -480,14 +479,20 @@ font-weight: bold;
 
 <div class="container-fluid bg-grey">
   <div class="row">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-globe logo slideanim"></span>
+    <div class="w3-container">
+      
     </div>
-    <div class="col-sm-8">
-      <h2>Our Values</h2><br>
-      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div align="center">
+      <h1>VISION</h1>
+      <p>&nbsp;</p>
+      <h3>To make a Tracking System which can keep a track of the condition and location of all the railway coaches in the workshop.
+        <p>&nbsp;</p>
+       <p style="font-size: 80%">This application can only be used by the mantainance staffs of the coaches, other users can just view the details of the coaches.</p></h3>
+      <p>&nbsp;</p>
+      <p align="left" style="font-size: 140%;"><strong>WORKING:</strong> There is an USER section where the admin can add/remove users. A new user can register only as a general user, to become an admin he/she must contact the current admin.
+        <br>In COACH MANAGEMENT section, admin can add a new coach which has recently been introduced/build.<br>In REGISTRATION section, a coach is registered for repair/maintainance in the workshop only after that it is send to mantainance area.<br> MAINTAINANCE section have many tables, each table represents a specific shop in the workshop, a coach travels from all these shops for repair/mantainance as shown in the flow chart above. Here the location of the coaches can easily be seen i.e., in which shop it is currently located. The admin can move the coaches from one shop to another by selecting a particular coach and pressing the arrow button<br>Finally in REPORT section, all the details and histroy of a specific coach (including the ones present in the shop) can be seen.
+                </p>
+
     </div>
   </div>
 </div>
@@ -713,7 +718,7 @@ $err="";
        $category= $_POST['category'];
        $b_date= $_POST['b_date']; 
 
-       $q1=mysqli_query($conn,"SELECT * FROM `railcoaches`.`coachmaster` where `COACH_NO`='$c_no'");
+       $q1=mysqli_query($conn,"SELECT * FROM `epiz_26877844_railway`.`coachmaster` where `COACH_NO`='$c_no'");
 
        
           $coun=mysqli_num_rows($q1);
@@ -726,7 +731,7 @@ $err="";
           }
           elseif ($coun==0) {
             
-          $query6 = "INSERT INTO `railcoaches`.`coachmaster` (`RAILWAY_ZONE`, `ALLOATED_BASE`, `COACH_NO`, `FULL_BRAKE`, `COACH_TYPE`, `MAKE`, `CATEGORY`, `BUILT_DATE`)values ('$rly','$all_base','$c_no','$full_bk','$type','$make','$category','$b_date')";
+          $query6 = "INSERT INTO `epiz_26877844_railway`.`coachmaster` (`RAILWAY_ZONE`, `ALLOATED_BASE`, `COACH_NO`, `FULL_BRAKE`, `COACH_TYPE`, `MAKE`, `CATEGORY`, `BUILT_DATE`)values ('$rly','$all_base','$c_no','$full_bk','$type','$make','$category','$b_date')";
          $retval = mysqli_query($conn,$query6);   
              
 
@@ -922,12 +927,13 @@ echo $err;
 
   <h2 class="lm" style="padding-left: 10px">VIEW MASTER</h2></td>
 <div style="float:left; width:50%; max-height: 100%" >
-  <form action="" method="post" style="width:900px ; max-height: 100%; border-style: ridge;border-color: #000066;border-width: 5px; margin-left: 190px;"align="center"form-group >
+  <form action="" method="post" style="width:1000px ; max-height: 100%; border-style: ridge;border-color: #000066;border-width: 5px; margin-left: 190px;"align="center"form-group >
         <div  style="float:left; width:100%; " align="center">
          
           <div style="display:inline;">
           <select multiple class="form-control" id="adch" name="adch" id="lstBox1" style="height: 250px; padding-left: 35px" required> &nbsp;CATEGORY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <option disabled>RAILWAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALLOTED BASE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COACH NO.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BRAKE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAKE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CATEGORY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BUILT DATE</option>
+            <option disabled>
+            RLY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;_BASE_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;COACH NO.&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;BRAKE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TYPE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;__MAKE__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_CATEGORY_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BUILT DATE</option>
                             <?php
                 while ($row=mysqli_fetch_array($que1)):;
                 ?>
@@ -935,19 +941,19 @@ echo $err;
 
                                         
                       <?php echo $row[0];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[1];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[2];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[3];?>
                     <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[4];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[5];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[6];?>
-                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
+                    <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                     <?php echo $row[7];?>
                     <?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"?>
                                 </option>
@@ -1533,71 +1539,12 @@ echo $err;
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-<h1 align="center">REPORT</h1>
+<h1  align="center"><a href="newreport.php">REPORT</a></h1>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
 
 
 
-<div class="center">
-<form method="post" action="" >
-   <h3 style="" align="center"><STRONG>SHOP HOLDING</STRONG></h3>  
-  <table height="20%" width="80%" >
-    <tr>
-      <td width="40%" align="right"><strong>SELECT STAGE</strong></td>
-      <td width="40%" align="left">
-        <select name="stage">
-          <option>ALL</option>
-          <option>STRIPPING AND INSPECTION</option>
-          <option>POH</option>
-          <option>MCR</option>
-          <OPTION>HCR</OPTION>
-          <option>PAINT SHOP</option>
-          <option>LIFTING SHOP</option>
-          <option>BRAKE SHOP</option>
-          <option>NTXR SHOP</option>
-          <option>REPAIR SHOP</option>
-          <option>TRAFFIC OUT</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="right"><input type="submit" name="submit" value="SUBMIT" /></td>
-    </tr>
-
- <td colspan="2" align="right">
-<button  onClick="printContent('div1')" style="">PRINT REPORT</button>
-</td>
-    
-
-
-  </table>
-</form>
-</div>
-
-<p>&nbsp;&nbsp;</p>
-<div class="center" >
-  <form method="post" action="" >
-  <h3><STRONG>COACH HISTORY</STRONG></h3>
-
-<table height="20%" width="100%" align="center">
-<tr><td width="40%" align="right"><strong>ENTER COACH NO.</strong></td>
-<td><input type="text" style="display: inline-block;  box-sizing: border-box;" placeholder="COACH NO." name="c_no" required /></td></tr>
-<tr><td colspan="2" align="right"><input type="submit" name="submit2" value="SUBMIT" /></td></tr>
-
-<td colspan="2" align="right">
-<button onClick="printContent('div2')">PRINT HISTORY</button>
-</td>
-
-
-</table>
-</form>
-</div>
-
-
-
-<?php include('repdetail.php')?>
-  
 
 
 
@@ -1617,7 +1564,8 @@ echo $err;
 
 
 
-</div> 
+
+ 
 
 
 

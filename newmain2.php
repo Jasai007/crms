@@ -17,21 +17,7 @@ require_once "session.php";
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/site.css">
 
-  <script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
-  <link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
   
-
-<script type="text/javascript">
-    function printContent(el)
-    {
-    var restorepage=document.body.innerHTML;
-    var printcontent=document.getElementById(el).innerHTML;
-    document.body.innerHTML=printcontent;
-    window.print();
-    document.body.innerHTML=restorepage;
-      }
-
-</script>
 
 
 
@@ -531,14 +517,20 @@ h1{background-color: #000066;color:white;margin-left: 100px;margin-right: 100px;
 
 <div class="container-fluid bg-grey">
   <div class="row">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-globe logo slideanim"></span>
+    <div class="w3-container">
     </div>
-    <div class="col-sm-8">
-      <h2>Our Values</h2><br>
-      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div align="center">
+       <h1>VISION</h1>
+      <p>&nbsp;</p>
+      <h3>To make a Tracking System which can keep a track of the condition and location of all the railway coaches in the workshop.
+        <p>&nbsp;</p>
+       <p style="font-size: 80%">This application can only be used by the admins/workers who does the maintainance of the coaches other users can just view the details of the coaches.</p></h3>
+      <p>&nbsp;</p>
+       <p align="left" style="font-size: 140%;"><strong>WORKING:</strong> There is an USER section where the admin can add/remove users. A new user can register only as a general user, to become an admin he/she must contact the current admin.
+        <br>In COACH MANAGEMENT section, admin can add a new coach which has recently been introduced/build.<br>In REGISTRATION section, a coach is registered for repair/maintainance in the workshop only after that it is send to mantainance area.<br> MAINTAINANCE section have many tables, each table represents a specific shop in the workshop, a coach travels from all these shops for repair/mantainance as shown in the flow chart above. Here the location of the coaches can easily be seen i.e., in which shop it is currently located. The admin can move the coaches from one shop to another by selecting a particular coach and pressing the arrow button<br>Finally in REPORT section, all the details and histroy of a specific coach (including the ones present in the shop) can be seen.
+                </p>
+
+
     </div>
   </div>
 </div>
