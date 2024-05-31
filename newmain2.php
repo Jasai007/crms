@@ -497,7 +497,7 @@ h1{background-color: #000066;color:white;margin-left: 100px;margin-right: 100px;
 
     </td>
     <td width="65%" align="justify">
-        <img src="flowchart.png" height="453" width="806" /></td>
+        <img src="flowchart.jpg" height="453" width="806" /></td>
   </tr>
 </table>
 
