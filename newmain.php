@@ -459,7 +459,7 @@ font-weight: bold;
 
     </td>
     <td width="65%" align="justify">
-        <img src="flowchart.png" height="453" width="806" /></td>
+        <img src="flowchart.jpg" height="453" width="806" /></td>
   </tr>
 </table>
 
