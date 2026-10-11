@@ -1,35 +1,134 @@
- <h1  style= "color: white;text-align: center;">My First Project on...</h1>
- <h2 style="font-size: 30px;text-align: center;"><strong>Railway Coach Repair and Management System</strong></h2>
+# CRMS v2 — Coach Repair & Management System
 
- ![flowchart](https://github.com/Jasai007/crms/assets/47225534/11398c9f-0006-4417-b4dd-575395955937)
+**South Eastern Railway Workshop, Kharagpur**
 
-<p><strong> This is the very first project starting out in Web Development at Indian Railway with an approach of implementation while learning, which may have led to poor management and functioning of the code. However, the sole purpose we were trying to achieve was the implementation of the flowchart above in the code. Working on version 2 with better approach. </strong> </p>
-<br></br>
+A full rewrite of the original plain PHP/MySQL application as a modern,
+responsive, secure web app: **Express + SQLite REST API** with a
+**React + Vite + Tailwind CSS** single-page frontend.
 
-***********************************************************************************************************************
+![Workflow](legacy/flowchart.jpg)
 
-<p><strong>WORKING:</strong> After logged in you can find - </p>
-<p>There is a <strong>USER</strong> section where the admin can add or remove users. A new user can register only as a general user and gets only viewing option; to become an admin, he or she must contact the current admin.</p>
-<p>In the <strong>COACH MANAGEMENT</strong> section, the admin can add a new coach, which has recently been introduced or built.</p>
-<p>In the <strong>REGISTRATION</strong> section, a coach is registered for repair or maintenance in the workshop. Only after that is it sent to the maintenance area.</p>
-<p>The <strong>MAINTENANCE</strong> section has many tables, each representing a specific shop in the workshop. A coach travels through all these shops for repair or maintenance, as shown in the flow chart above. Here, the location of the coaches can easily be seen, i.e., in which shop it is currently located. The admin can move the coaches from one shop to another by selecting a particular coach and pressing the arrow button.</p>
-<p>Finally, in the <strong>REPORT</strong> section, all the details and history of a specific coach (including the ones present in the shop) can be seen.</p>
+## Features
 
-***********************************************************************************************************************
+| Section | What it does |
+|---|---|
+| **Auth** | Login, self-registration (viewer role), JWT in httpOnly cookie, bcrypt passwords |
+| **Dashboard** | Live counters: coaches in master / in workshop / released, stage-wise breakdown |
+| **Coach Management** | Searchable master list; admins add / edit / delete coaches |
+| **Registration** | Register an idle coach for repair (POH / MCR / HCR) with workshop-in date and estimated hours |
+| **Maintenance** | Kanban board of the shop floor; admins move coach cards forward/back through the workshop |
+| **Reports** | Shop-holding report by stage + full per-coach repair history with printable view |
+| **Users** | Admin-only: add, delete, promote/demote users; search |
 
-<br></br>
-You can checkout--<a href="http://crmsapp.infinityfreeapp.com/" ><i>Click here</i></a></p>
-<p style="font-size: 20px;text-align: center;"><strong>LOGIN DETAILS</strong></p>
-<p style="font-size: 20px;text-align: center;"><u>ADMIN USER</u><br> username-- jasai007<br>password-- jasai</p>
-<p style="font-size: 20px;text-align: center;"><u>GENERAL USER</u><br> username-- monty99<br>password-- monty</p>
-<br></br>
-<p><strong>***Some functions on the website may not work properly and may need frequent reloads, opening a session in a new tab, or re-login. Otherwise, it works well just for viewing purposes. (Only for Desktop view (NON-RESPONSIVE))***</strong> </p>
+### The workshop flow
 
+```
+Registered → Stripping & Inspection → [POH | MCR | HCR] → Paint → Lifting
+   → Brake → Pit Line (NTXR inspection)
+        ├─ Fit  → Traffic Out (released)
+        └─ Not fit → Repair Shop
+                        ├─ repairs ongoing → back to Pit Line
+                        └─ done → Traffic Out
+```
 
+Every move is validated by a single state machine
+(`server/src/services/shopFlow.js`) and recorded as an append-only
+timeline in `stage_events` — the 8 scattered per-shop tables of the
+legacy app were replaced by this one model.
 
+## Quick start
 
+Requirements: **Node.js ≥ 18** (tested on 22).
 
+```bash
+npm install            # root tooling (concurrently)
+npm run setup          # install server+client deps, seed the legacy data
+npm run dev            # API on :3001 + web app on :5173
+```
 
+Open **http://localhost:5173**.
 
- 
+Production-style run (API serves the built SPA from `client/dist`):
 
+```bash
+npm run build
+npm start              # everything on http://localhost:3001
+```
+
+### Demo logins
+
+| Role | Username | Password |
+|---|---|---|
+| Admin | `jasai007` | `jasai` |
+| Viewer | `monty99` | `monty` |
+
+All other users imported from the legacy database have password
+`password` (their original MD5 hashes cannot be upgraded to bcrypt
+without the plaintext).
+
+### Smoke test
+
+With the server running:
+
+```bash
+npm run smoke          # 29 end-to-end API assertions
+```
+
+## Project layout
+
+```
+├── server/                 Express + better-sqlite3 REST API
+│   ├── src/
+│   │   ├── index.js        App entry; also serves client/dist in production
+│   │   ├── db.js           SQLite schema (users, coaches, registrations, stage_events)
+│   │   ├── seed.js         Ports legacy/database/railcoaches.sql into the new schema
+│   │   ├── middleware/     JWT auth, requireAuth / requireAdmin guards
+│   │   ├── routes/         auth, users, coaches, registrations, reports
+│   │   └── services/
+│   │       └── shopFlow.js The workshop state machine (replaces 7 check_*.php files)
+│   └── scripts/smokeTest.mjs
+├── client/                 React + Vite + Tailwind SPA
+│   └── src/
+│       ├── pages/          Login, Register, Dashboard, Coaches, Registrations,
+│       │                   Maintenance (kanban), Reports, Users
+│       ├── components/     Layout (responsive sidebar), Modal, StageBadge…
+│       ├── context/        AuthContext (session state)
+│       └── api/client.js   Fetch wrapper
+└── legacy/                 The original PHP application (reference only, not served)
+```
+
+## API overview
+
+All endpoints are under `/api`; auth uses an httpOnly cookie.
+
+| Method & path | Access | Purpose |
+|---|---|---|
+| `POST /auth/login` · `/auth/register` · `/auth/logout`, `GET /auth/me` | public / session | Session handling |
+| `GET /coaches?q=` | any user | List/search coach master |
+| `POST /coaches`, `PUT/DELETE /coaches/:id` | admin | Manage coaches |
+| `GET /registrations?status=&stage=&q=` | any user | List registrations with stage + required move inputs |
+| `GET /registrations/:id` | any user | Registration detail + event timeline |
+| `POST /registrations` | admin | Register a coach for repair |
+| `POST /registrations/:id/move` | admin | `{direction, actualHours?, shopNo?, fit?, done?}` |
+| `GET/POST /users`, `PUT /users/:id/role`, `DELETE /users/:id` | admin | User management |
+| `GET /reports/stats` · `/reports/holding?stage=` · `/reports/history/:coachNo` | any user | Dashboard + reports |
+
+## Security changes vs v1
+
+- **SQL injection**: eliminated — every query is parameterized (`better-sqlite3`)
+- **Passwords**: bcrypt hashes replace MD5; hashes are never returned by the API
+- **Sessions**: signed JWT in an httpOnly cookie instead of PHP sessions with plaintext checks
+- **Roles**: enforced server-side (`requireAdmin`) on every mutating route, not just hidden in the UI
+- **Validation**: zod schemas on every request body
+- **No secrets in code**: `JWT_SECRET` read from environment (dev default otherwise)
+
+## Migrating to MySQL
+
+The data layer is isolated in `server/src/db.js`. Swap `better-sqlite3`
+for `mysql2/promise`, keep the same table shapes (see the schema there),
+and re-point `seed.js` — no route or UI changes required.
+
+## History
+
+v1 (2019–2020) was the original learning project in plain PHP/MySQL and
+lives in `legacy/` for reference. See the git history for the original code.

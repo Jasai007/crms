@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-100 text-slate-800 antialiased;
+  }
+}
+
+@layer components {
+  /* Shared building blocks so pages stay consistent. */
+  .card {
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-rail-900 text-white hover:bg-rail-700 focus:ring-rail-500;
+  }
+  .btn-secondary {
+    @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:ring-slate-400;
+  }
+  .btn-danger {
+    @apply btn bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500;
+  }
+  .btn-success {
+    @apply btn bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-rail-500 focus:outline-none focus:ring-1 focus:ring-rail-500;
+  }
+  .label {
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500;
+  }
+  .table-th {
+    @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-500;
+  }
+  .table-td {
+    @apply px-3 py-2 text-sm text-slate-700;
+  }
+}
+
+/* Stage badges: one colour per workshop area. */
+.stage-badge {
+  @apply inline-flex whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold;
+}
+.stage-REGISTERED  { @apply bg-slate-200 text-slate-700; }
+.stage-STRIPPING   { @apply bg-amber-100 text-amber-800; }
+.stage-POH         { @apply bg-sky-100 text-sky-800; }
+.stage-MCR         { @apply bg-cyan-100 text-cyan-800; }
+.stage-HCR         { @apply bg-teal-100 text-teal-800; }
+.stage-PAINTING    { @apply bg-fuchsia-100 text-fuchsia-800; }
+.stage-LIFTING     { @apply bg-violet-100 text-violet-800; }
+.stage-BRAKE       { @apply bg-indigo-100 text-indigo-800; }
+.stage-NTXR        { @apply bg-blue-100 text-blue-800; }
+.stage-REPAIR      { @apply bg-rose-100 text-rose-800; }
+.stage-TRAFFIC_OUT { @apply bg-emerald-100 text-emerald-800; }
+
+/* Print stylesheet for the reports page. */
+@media print {
+  body * { visibility: hidden; }
+  #print-area, #print-area * { visibility: visible; }
+  #print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0;
+  }
+  .no-print { display: none !important; }
+}
